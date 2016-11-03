@@ -9,8 +9,7 @@ const getPost = (req, res) => {
 }
 
 const postPosts = (req, res) => {
-  console.log(req.body);
-  Post.create({title: 'testing123', test: 'sucessfully created a test post'}, () => {
+  Post.create(req.body, () => {
     console.log('Post successfully created');
   })
 }
