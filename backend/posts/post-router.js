@@ -4,7 +4,7 @@ const Post = require('mongoose').model('Post');
 //Get all posts from database
 const getPost = (req, res) => {
   Post.find({}, (err, data) => {
-    res.send(data);
+    res.json(data);
   })
 }
 
