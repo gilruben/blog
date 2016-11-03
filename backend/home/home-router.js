@@ -10,4 +10,7 @@ const home = (req, res) => {
 router.route('/')
   .get(home)
 
+router.route('/posts')
+  .get(home)
+
 module.exports = router;
