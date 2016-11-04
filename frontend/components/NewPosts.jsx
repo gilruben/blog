@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 const NewPost = React.createClass({
   getInitialState(){
@@ -18,7 +19,7 @@ const NewPost = React.createClass({
     let inputContent = this.state.content;
 
     $.ajax({
-      url: '/posts',
+      url: '/api/posts',
       type: 'POST',
       data: {title: inputTitle, content: inputContent}
     })

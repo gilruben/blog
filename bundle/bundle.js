@@ -36604,6 +36604,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _jquery = __webpack_require__(227);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var NewPost = _react2.default.createClass({
@@ -36624,8 +36628,8 @@
 	    var inputTitle = this.state.title;
 	    var inputContent = this.state.content;
 	
-	    $.ajax({
-	      url: '/posts',
+	    _jquery2.default.ajax({
+	      url: '/api/posts',
 	      type: 'POST',
 	      data: { title: inputTitle, content: inputContent }
 	    });
