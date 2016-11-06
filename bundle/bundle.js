@@ -36793,13 +36793,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TargetPost = function TargetPost(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    'TARGET POST'
-	  );
-	};
+	var TargetPost = _react2.default.createClass({
+	  displayName: 'TargetPost',
+	  componentWillMount: function componentWillMount() {
+	    // const id = this.props.params.id
+	    // $.ajax({
+	    //   url: `api/posts/${id}`,
+	    //   success(data){
+	    //     console.log(data)
+	    //   }
+	    // })
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      this.props.params.id
+	    );
+	  }
+	});
 	
 	exports.default = TargetPost;
 
