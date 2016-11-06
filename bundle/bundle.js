@@ -76,6 +76,10 @@
 	
 	var _Post2 = _interopRequireDefault(_Post);
 	
+	var _TargetPost = __webpack_require__(233);
+	
+	var _TargetPost2 = _interopRequireDefault(_TargetPost);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = _react2.default.createClass({
@@ -100,7 +104,7 @@
 	      _reactRouter.Route,
 	      { path: 'posts', component: _PostsPage2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Posts2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Post2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _TargetPost2.default })
 	    )
 	  )
 	), document.getElementById('root'));
@@ -36677,6 +36681,10 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
+	var _Post = __webpack_require__(232);
+	
+	var _Post2 = _interopRequireDefault(_Post);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Posts = _react2.default.createClass({
@@ -36689,7 +36697,7 @@
 	      url: '/api/posts',
 	      success: function (data) {
 	        console.log(data);
-	        this.setState({ data: data[0] });
+	        this.setState({ data: data });
 	      }.bind(this)
 	    });
 	  },
@@ -36697,7 +36705,14 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      this.state.data ? this.state.data.title : null
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Posts'
+	      ),
+	      this.state.data ? this.state.data.map(function (val, indx) {
+	        return _react2.default.createElement(_Post2.default, { key: indx, title: val.title, content: val.content, dbId: val._id });
+	      }) : null
 	    );
 	  }
 	});
@@ -36747,11 +36762,46 @@
 	    return _react2.default.createElement(
 	        'div',
 	        null,
-	        'POST'
+	        _react2.default.createElement(
+	            'h2',
+	            null,
+	            props.title
+	        ),
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            props.content
+	        )
 	    );
 	};
 	
 	exports.default = Post;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var TargetPost = function TargetPost(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'TARGET POST'
+	  );
+	};
+	
+	exports.default = TargetPost;
 
 /***/ }
 /******/ ]);

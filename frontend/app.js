@@ -6,6 +6,7 @@ import NewPosts from './components/NewPosts';
 import PostsPage from './components/PostsPage';
 import Posts from './components/Posts';
 import Post from './components/Post';
+import TargetPost from './components/TargetPost';
 
 const App = React.createClass({
   render(){
@@ -23,7 +24,7 @@ ReactDOM.render(
       <IndexRoute component={NewPosts} />
       <Route path="posts" component={PostsPage} >
         <IndexRoute component={Posts} />
-        <Route path=":id" component={Post} />
+        <Route path=":id" component={TargetPost} />
       </Route>
     </Route>
   </Router>,

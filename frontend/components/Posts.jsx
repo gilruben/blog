@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import Post from './Post';
 
 const Posts = React.createClass({
   getInitialState(){
@@ -10,15 +11,18 @@ const Posts = React.createClass({
       url: '/api/posts',
       success: function(data) {
         console.log(data)
-        this.setState({data: data[0]})
+        this.setState({data: data})
       }.bind(this)
     })
   },
   render(){
     return (
       <div>
-        {this.state.data ? this.state.data.title : null}
-  
+        <h1>Posts</h1>
+        {this.state.data ? this.state.data.map((val, indx) =>(
+          <Post key={indx} title={val.title} content={val.content} dbId={val._id} />
+        )) : null}
+
       </div>
     )
   }

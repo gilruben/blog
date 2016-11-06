@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Post = (props) => {
-    return <div>POST</div>
+    return (
+      <div>
+          <h2>{props.title}</h2>
+          <p>
+            {props.content}
+          </p>
+      </div>
+    )
 }
 
 export default Post;
