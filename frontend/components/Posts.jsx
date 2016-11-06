@@ -10,14 +10,15 @@ const Posts = React.createClass({
       url: '/api/posts',
       success: function(data) {
         console.log(data)
-        this.setState({data: data})
+        this.setState({data: data[0]})
       }.bind(this)
     })
   },
   render(){
     return (
       <div>
-        POSTS!!!
+        {this.state.data ? this.state.data.title : null}
+  
       </div>
     )
   }

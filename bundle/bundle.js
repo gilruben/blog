@@ -64,9 +64,17 @@
 	
 	var _NewPosts2 = _interopRequireDefault(_NewPosts);
 	
+	var _PostsPage = __webpack_require__(231);
+	
+	var _PostsPage2 = _interopRequireDefault(_PostsPage);
+	
 	var _Posts = __webpack_require__(229);
 	
 	var _Posts2 = _interopRequireDefault(_Posts);
+	
+	var _Post = __webpack_require__(232);
+	
+	var _Post2 = _interopRequireDefault(_Post);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88,7 +96,12 @@
 	    _reactRouter.Route,
 	    { path: '/', component: App },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _NewPosts2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'posts', component: _Posts2.default })
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { path: 'posts', component: _PostsPage2.default },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Posts2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Post2.default })
+	    )
 	  )
 	), document.getElementById('root'));
 
@@ -36619,7 +36632,6 @@
 	    this.setState({ title: e.target.value });
 	  },
 	  handleContentChange: function handleContentChange(e) {
-	    console.log(e.target.value);
 	    this.setState({ content: e.target.value });
 	  },
 	  handleSubmit: function handleSubmit(e) {
@@ -36677,7 +36689,7 @@
 	      url: '/api/posts',
 	      success: function (data) {
 	        console.log(data);
-	        this.setState({ data: data });
+	        this.setState({ data: data[0] });
 	      }.bind(this)
 	    });
 	  },
@@ -36685,12 +36697,61 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      'POSTS!!!'
+	      this.state.data ? this.state.data.title : null
 	    );
 	  }
 	});
 	
 	exports.default = Posts;
+
+/***/ },
+/* 230 */,
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PostsPage = function PostsPage(props) {
+	  return props.children;
+	};
+	
+	exports.default = PostsPage;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Post = function Post(props) {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        'POST'
+	    );
+	};
+	
+	exports.default = Post;
 
 /***/ }
 /******/ ]);

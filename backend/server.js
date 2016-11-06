@@ -20,6 +20,8 @@ db.on('open', () => {
   app.use('/api/posts', routes.posts);
   app.use('/*', routes.home);
 
+  const env = process.env.NODE_ENV || 'production';
+
   app.listen(5555, () => {
     console.log('Listening on port 5555');
   });
