@@ -9,7 +9,6 @@ const NewPost = React.createClass({
     this.setState({title: e.target.value})
   },
   handleContentChange(e){
-    console.log(e.target.value)
     this.setState({content: e.target.value})
   },
   handleSubmit(e){

@@ -56,17 +56,21 @@
 	
 	var _reactRouter = __webpack_require__(172);
 	
-	var _jquery = __webpack_require__(227);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _NewPosts = __webpack_require__(228);
+	var _NewPosts = __webpack_require__(227);
 	
 	var _NewPosts2 = _interopRequireDefault(_NewPosts);
 	
-	var _Posts = __webpack_require__(229);
+	var _PostsPage = __webpack_require__(229);
+	
+	var _PostsPage2 = _interopRequireDefault(_PostsPage);
+	
+	var _Posts = __webpack_require__(230);
 	
 	var _Posts2 = _interopRequireDefault(_Posts);
+	
+	var _TargetPost = __webpack_require__(232);
+	
+	var _TargetPost2 = _interopRequireDefault(_TargetPost);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88,7 +92,12 @@
 	    _reactRouter.Route,
 	    { path: '/', component: App },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _NewPosts2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'posts', component: _Posts2.default })
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { path: 'posts', component: _PostsPage2.default },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Posts2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _TargetPost2.default })
+	    )
 	  )
 	), document.getElementById('root'));
 
@@ -26368,6 +26377,62 @@
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(228);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var NewPost = _react2.default.createClass({
+	  displayName: 'NewPost',
+	  getInitialState: function getInitialState() {
+	    return { title: '', content: '' };
+	  },
+	  handleTitleChange: function handleTitleChange(e) {
+	    this.setState({ title: e.target.value });
+	  },
+	  handleContentChange: function handleContentChange(e) {
+	    this.setState({ content: e.target.value });
+	  },
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	
+	    var inputTitle = this.state.title;
+	    var inputContent = this.state.content;
+	
+	    _jquery2.default.ajax({
+	      url: '/api/posts',
+	      type: 'POST',
+	      data: { title: inputTitle, content: inputContent }
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'form',
+	      { onSubmit: this.handleSubmit },
+	      _react2.default.createElement('input', { type: 'text', onChange: this.handleTitleChange, placeholder: 'Title' }),
+	      _react2.default.createElement('input', { type: 'text', onChange: this.handleContentChange, placeholder: 'Body' }),
+	      _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+	    );
+	  }
+	});
+	
+	exports.default = NewPost;
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * jQuery JavaScript Library v3.1.1
 	 * https://jquery.com/
@@ -36591,63 +36656,6 @@
 
 
 /***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(227);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var NewPost = _react2.default.createClass({
-	  displayName: 'NewPost',
-	  getInitialState: function getInitialState() {
-	    return { title: '', content: '' };
-	  },
-	  handleTitleChange: function handleTitleChange(e) {
-	    this.setState({ title: e.target.value });
-	  },
-	  handleContentChange: function handleContentChange(e) {
-	    console.log(e.target.value);
-	    this.setState({ content: e.target.value });
-	  },
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	
-	    var inputTitle = this.state.title;
-	    var inputContent = this.state.content;
-	
-	    _jquery2.default.ajax({
-	      url: '/api/posts',
-	      type: 'POST',
-	      data: { title: inputTitle, content: inputContent }
-	    });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'form',
-	      { onSubmit: this.handleSubmit },
-	      _react2.default.createElement('input', { type: 'text', onChange: this.handleTitleChange, placeholder: 'Title' }),
-	      _react2.default.createElement('input', { type: 'text', onChange: this.handleContentChange, placeholder: 'Body' }),
-	      _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
-	    );
-	  }
-	});
-	
-	exports.default = NewPost;
-
-/***/ },
 /* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36661,9 +36669,35 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _jquery = __webpack_require__(227);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PostsPage = function PostsPage(props) {
+	  return props.children;
+	};
+	
+	exports.default = PostsPage;
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(228);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _Post = __webpack_require__(231);
+	
+	var _Post2 = _interopRequireDefault(_Post);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -36676,7 +36710,6 @@
 	    _jquery2.default.ajax({
 	      url: '/api/posts',
 	      success: function (data) {
-	        console.log(data);
 	        this.setState({ data: data });
 	      }.bind(this)
 	    });
@@ -36685,12 +36718,115 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      'POSTS!!!'
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Posts'
+	      ),
+	      this.state.data ? this.state.data.map(function (val, indx) {
+	        return _react2.default.createElement(_Post2.default, { key: indx, title: val.title, content: val.content, dbId: val._id });
+	      }) : null
 	    );
 	  }
 	});
 	
 	exports.default = Posts;
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Post = function Post(props) {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/posts/' + props.dbId },
+	            _react2.default.createElement(
+	                'h2',
+	                null,
+	                props.title
+	            )
+	        ),
+	        _react2.default.createElement(
+	            'p',
+	            null,
+	            props.content
+	        )
+	    );
+	};
+	
+	exports.default = Post;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(228);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var TargetPost = _react2.default.createClass({
+	  displayName: 'TargetPost',
+	  getInitialState: function getInitialState() {
+	    return { title: null, content: null };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    var id = this.props.params.id;
+	
+	    _jquery2.default.ajax({
+	      url: '/api/posts/' + id,
+	      success: function (data) {
+	        this.setState({ title: data.title, content: data.content });
+	      }.bind(this)
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        this.state.title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        this.state.content
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = TargetPost;
 
 /***/ }
 /******/ ]);

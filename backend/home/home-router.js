@@ -7,10 +7,13 @@ const home = (req, res) => {
 }
 
 //Configure router for get and post calls
-router.route('/')
+router.route('/*')
   .get(home)
 
-router.route('/posts')
-  .get(home)
+// router.route('/posts')
+//   .get(home)
+//
+// router.route('/posts/hello')
+//   .get(home)
 
 module.exports = router;
