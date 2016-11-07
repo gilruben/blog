@@ -21,7 +21,6 @@ const Posts = React.createClass({
         {this.state.data ? this.state.data.map((val, indx) =>(
           <Post key={indx} title={val.title} content={val.content} dbId={val._id} />
         )) : null}
-
       </div>
     )
   }

@@ -21,12 +21,18 @@ const postPosts = (req, res) => {
   })
 }
 
+const updatePost = (req, res) => {
+  console.log(UPDATE)
+  //Post.findOneAndUpdate();
+}
+
 router.route('/')
   .get(getPost)
   .post(postPosts)
 
 router.route('/:id')
-    .get(getPostById)
+  .get(getPostById)
+  .put(updatePost)
 
 
 module.exports = router;
