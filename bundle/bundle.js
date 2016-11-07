@@ -56,10 +56,6 @@
 	
 	var _reactRouter = __webpack_require__(172);
 	
-	var _jquery = __webpack_require__(227);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
 	var _NewPosts = __webpack_require__(228);
 	
 	var _NewPosts2 = _interopRequireDefault(_NewPosts);
@@ -71,10 +67,6 @@
 	var _Posts = __webpack_require__(229);
 	
 	var _Posts2 = _interopRequireDefault(_Posts);
-	
-	var _Post = __webpack_require__(232);
-	
-	var _Post2 = _interopRequireDefault(_Post);
 	
 	var _TargetPost = __webpack_require__(233);
 	
@@ -36696,7 +36688,6 @@
 	    _jquery2.default.ajax({
 	      url: '/api/posts',
 	      success: function (data) {
-	        console.log(data);
 	        this.setState({ data: data });
 	      }.bind(this)
 	    });
@@ -36756,6 +36747,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(172);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Post = function Post(props) {
@@ -36763,9 +36756,13 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	            'h2',
-	            null,
-	            props.title
+	            _reactRouter.Link,
+	            { to: '/posts/' + props.dbId },
+	            _react2.default.createElement(
+	                'h2',
+	                null,
+	                props.title
+	            )
 	        ),
 	        _react2.default.createElement(
 	            'p',
@@ -36791,24 +36788,41 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _jquery = __webpack_require__(227);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var TargetPost = _react2.default.createClass({
 	  displayName: 'TargetPost',
+	  getInitialState: function getInitialState() {
+	    return { title: null, content: null };
+	  },
 	  componentWillMount: function componentWillMount() {
-	    // const id = this.props.params.id
-	    // $.ajax({
-	    //   url: `api/posts/${id}`,
-	    //   success(data){
-	    //     console.log(data)
-	    //   }
-	    // })
+	    var id = this.props.params.id;
+	
+	    _jquery2.default.ajax({
+	      url: '/api/posts/' + id,
+	      success: function (data) {
+	        this.setState({ title: data.title, content: data.content });
+	      }.bind(this)
+	    });
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      this.props.params.id
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        this.state.title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        this.state.content
+	      )
 	    );
 	  }
 	});

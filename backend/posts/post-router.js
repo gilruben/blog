@@ -10,7 +10,6 @@ const getPost = (req, res) => {
 
 //Get post with a specific id
 const getPostById = (req, res) => {
-  console.log(req.params)
   Post.findById(req.params.id, (err, data) => {
     res.json(data);
   })

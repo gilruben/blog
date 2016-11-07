@@ -10,7 +10,6 @@ const Posts = React.createClass({
     $.ajax({
       url: '/api/posts',
       success: function(data) {
-        console.log(data)
         this.setState({data: data})
       }.bind(this)
     })

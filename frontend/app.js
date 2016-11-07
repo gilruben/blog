@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, Link, IndexRoute, browserHistory} from 'react-router';
-import $ from 'jquery';
 import NewPosts from './components/NewPosts';
 import PostsPage from './components/PostsPage';
 import Posts from './components/Posts';
-import Post from './components/Post';
 import TargetPost from './components/TargetPost';
 
 const App = React.createClass({

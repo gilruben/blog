@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 const Post = (props) => {
     return (
       <div>
-          <h2>{props.title}</h2>
+          <Link to={`/posts/${props.dbId}`}><h2>{props.title}</h2></Link>
           <p>
             {props.content}
           </p>
